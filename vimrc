@@ -1,8 +1,5 @@
-" => General
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Vim, not Vi!
 set nocompatible
-"Required for Vundle
+
 filetype off
 
 
@@ -31,6 +28,7 @@ Bundle 'Valloric/YouCompleteMe'
 
 Bundle 'groenewege/vim-less'
 
+Bundle  'klen/python-mode'
 
 set noswapfile
 
@@ -111,6 +109,23 @@ set smartindent
 set backspace=eol,start,indent
 set whichwrap+=<,>h,l
 
+filetype plugin indent on
+syntax on
+
 "vim-airline config
 let g:airline_theme="bubblegum"
 set laststatus=2
+
+
+"You Complete Me
+let g:ycm_server_keep_logfile = 1
+
+"python-mode
+map <Leader>g :call RopeGotoDefinition()<CR>
+
+let g:pymode_breakpoint = 0
+let g:pymode_syntax = 1
+let g:pymode_syntax_builtin_objs = 0
+let g:pymode_syntax_builtin_funcs = 0
+
+set nofoldenable
