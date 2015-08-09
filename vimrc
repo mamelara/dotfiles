@@ -24,10 +24,12 @@ Bundle 'Lokaltog/vim-easymotion'
 
 Bundle 'bling/vim-airline'
 
-Bundle 'Valloric/YouCompleteMe'
+"Bundle 'scrooloose/syntastic'
+"Bundle 'Valloric/YouCompleteMe'
 
 Bundle 'groenewege/vim-less'
 
+"Bundle 'davidhalter/jedi-vim'
 Bundle  'klen/python-mode'
 
 set noswapfile
@@ -81,6 +83,7 @@ au BufEnter * call SetColors()
 
 "Show whitespace
 
+"Source vimrc automatically once we save buffer
 autocmd! bufwritepost .vimrc source %
 
 set pastetoggle=<F2>
@@ -89,6 +92,7 @@ set bs=2
 
 let mapleader =","
 let g:mapleader =","
+
 "map for saving
 noremap <leader>w :w!<cr>
 
@@ -109,23 +113,37 @@ set smartindent
 set backspace=eol,start,indent
 set whichwrap+=<,>h,l
 
-filetype plugin indent on
+filetype plugin on
+filetype indent on
 syntax on
 
 "vim-airline config
 let g:airline_theme="bubblegum"
 set laststatus=2
 
+set nofoldenable
 
-"You Complete Me
-let g:ycm_server_keep_logfile = 1
-
-"python-mode
-map <Leader>g :call RopeGotoDefinition()<CR>
-
+"Syntastic
+"let g:syntastic_python_checkers = ['flake8']
+"
+"Python - Mode
+let ropevim_enable_shortcuts = 1
+let g:pymode_rope_goto_def_newwin = "vnew"
+let g:pymode_rope_extended_complete = 1
 let g:pymode_breakpoint = 0
 let g:pymode_syntax = 1
 let g:pymode_syntax_builtin_objs = 0
-let g:pymode_syntax_builtin_funcs = 0
+let g:pympde_syntax_builtin_funcs = 0
 
-set nofoldenable
+function! OmniPopup(action)
+    if pumvisible()
+        if a:action == 'j'
+            return "\<C-N>"
+        elseif a:action == 'k'
+            return "\<C-P>"
+        endif
+    endif
+    return a:action
+endfunction
+
+
