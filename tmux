@@ -2,6 +2,7 @@
 set-option -g prefix C-a
 bind-key C-a send-prefix
 unbind C-b
+
 # Use this to get better colors in tmux
 set -g default-terminal "screen-256color"
 
