@@ -5,6 +5,7 @@ filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
+Bundle 'tpope/vim-rails'
 
 Bundle "tpope/vim-sensible"
 
@@ -24,13 +25,16 @@ Bundle 'Lokaltog/vim-easymotion'
 
 Bundle 'bling/vim-airline'
 
+Plugin 'morhetz/gruvbox'
+
+Plugin 'nvie/vim-flake8'
 "Bundle 'scrooloose/syntastic'
 "Bundle 'Valloric/YouCompleteMe'
-
+Plugin 'ivanov/vim-ipython'
 Bundle 'groenewege/vim-less'
 
-"Bundle 'davidhalter/jedi-vim'
-Bundle  'klen/python-mode'
+Bundle 'davidhalter/jedi-vim'
+"Bundle  'klen/python-mode'
 
 set noswapfile
 
@@ -62,9 +66,9 @@ set scrolloff=7
 "Colors and fonts
 set t_Co=256
 syntax enable
-let g:hybrid_use_Xresources = 1
+"let g:hybrid_use_Xresources = 1
 set background=dark
-color hybrid
+colorscheme gruvbox 
 
 set colorcolumn=85
 highlight ColorColumn ctermbg=233
@@ -72,6 +76,14 @@ set number
 set ruler
 set nowrap
 set cursorline
+
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
+
 
 function! SetColors()
     set background=dark
@@ -118,7 +130,7 @@ filetype indent on
 syntax on
 
 "vim-airline config
-let g:airline_theme="bubblegum"
+let g:airline_theme="gruvbox"
 set laststatus=2
 
 set nofoldenable
@@ -126,14 +138,18 @@ set nofoldenable
 "Syntastic
 "let g:syntastic_python_checkers = ['flake8']
 "
-"Python - Mode
-let ropevim_enable_shortcuts = 1
-let g:pymode_rope_goto_def_newwin = "vnew"
-let g:pymode_rope_extended_complete = 1
-let g:pymode_breakpoint = 0
-let g:pymode_syntax = 1
-let g:pymode_syntax_builtin_objs = 0
-let g:pympde_syntax_builtin_funcs = 0
+"Jedi-Vim
+let g:jedi#usages_command = "<leader>z"
+let g:jedi#popup_on_dot = 0
+let g:jedi#popup_select_first = 0
+map <Leader>b import ipdb;ipdb.set_trace()
+
+"Settings for ctrlp
+let g:ctrlp_max_height = 30
+set wildignore+=*.pyc
+set wildignore+=*_build/
+set wildignore+=*/coverage/*
+
 
 function! OmniPopup(action)
     if pumvisible()
@@ -145,5 +161,4 @@ function! OmniPopup(action)
     endif
     return a:action
 endfunction
-
 
