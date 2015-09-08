@@ -38,7 +38,7 @@ Bundle 'davidhalter/jedi-vim'
 
 set noswapfile
 
-let mapleader = ","
+let mapleader = "\<Space>"
 
 set modelines=0
 
@@ -77,6 +77,7 @@ set ruler
 set nowrap
 set cursorline
 
+"Added extensions for copy and paste to clipboard
 vmap <Leader>y "+y
 vmap <Leader>d "+d
 nmap <Leader>p "+p
@@ -102,18 +103,18 @@ set pastetoggle=<F2>
 set mouse=a
 set bs=2
 
-let mapleader =","
-let g:mapleader =","
 
-"map for saving
-noremap <leader>w :w!<cr>
-
+"map for saving and quitting and sorting
+noremap <leader>w :w<CR> 
 noremap <Leader>e :q!<CR>
 
 vnoremap <Leader>s :sort<CR>
 
 vnoremap < <gv
 vnoremap > >gv
+
+" Enter visual line mode with <Space><Space>
+nmap <Leader><Leader> V
 
 set tabstop=4
 set shiftwidth=4
@@ -128,6 +129,10 @@ set whichwrap+=<,>h,l
 filetype plugin on
 filetype indent on
 syntax on
+"Discover text search object
+vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
+    \:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
+omap s :normal vs<CR>
 
 "vim-airline config
 let g:airline_theme="gruvbox"
