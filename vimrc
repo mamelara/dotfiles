@@ -4,27 +4,22 @@ filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Bundle 'tpope/vim-rails'
-Bundle "tpope/vim-sensible"
-Bundle "gmarik/vundle"
-Bundle "xolox/vim-misc"
-Bundle "xolox/vim-reload"
-Bundle "vim-scripts/vimwiki"
-Bundle 'kien/ctrlp.vim'
-Bundle 'vim-scripts/Align'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'bling/vim-airline'
-Plugin 'morhetz/gruvbox'
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-sensible'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-reload'
+Plugin 'vim-scripts/vimwiki'
+Plugin 'kien/ctrlp.vim'
+Plugin 'vim-scripts/Align'
+Plugin 'Lokaltog/vim-easymotion'
 Plugin 'nvie/vim-flake8'
-Bundle 'scrooloose/syntastic'
-Bundle 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/syntastic'
+Plugin 'ajh17/VimCompletesMe'
 Plugin 'ivanov/vim-ipython'
-Bundle 'groenewege/vim-less'
-Bundle 'davidhalter/jedi-vim'
-"Bundle  'klen/python-mode'
-"Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'groenewege/vim-less'
+Plugin 'davidhalter/jedi-vim'
 Plugin 'chriskempson/base16-vim'
-
 call vundle#end()
 filetype plugin indent on
 
@@ -50,17 +45,19 @@ vnoremap < <gv
 vnoremap > >gv
 
 set modelines=0
-
 set shell=/bin/sh
-
-
 set directory=$HOME/.vim/tmp
 
 set hi=1000
 
 set visualbell
 
-set grepprg=ack
+if executable("ag")
+    set grepprg=ag\ --nogroup\ --nocolor\ --ignore-case\ --column
+    set grepformat=%f:%l:%c:%m,%f:%l:%m
+endif
+
+"set grepprg=ack
 
 set nojoinspaces
 
@@ -80,33 +77,12 @@ set t_Co=16
 "set t_Co=256
 set background=dark
 colorscheme base16-railscasts
-"colorscheme base16-default
-"colorscheme base16-mocha
-"colorscheme base16-beard
 syntax on
 syntax enable
+
 "filetype plugin on
 "filetype indent on
 
-"railscasts settings
-"highlight clear SignColumn
-"  highlight VertSplit    ctermbg=236
-"  highlight ColorColumn  ctermbg=237
-"  highlight LineNr       ctermbg=236 ctermfg=240
-"  highlight CursorLineNr ctermbg=236 ctermfg=240
-"  highlight CursorLine   ctermbg=236
-"  highlight StatusLineNC ctermbg=238 ctermfg=0
-"  highlight StatusLine   ctermbg=240 ctermfg=12
-"  highlight IncSearch    ctermbg=3   ctermfg=1
-"  highlight Search       ctermbg=1   ctermfg=3
-"  highlight Visual       ctermbg=3   ctermfg=0
-"  highlight Pmenu        ctermbg=240 ctermfg=12
-"  highlight PmenuSel     ctermbg=3   ctermfg=1
-"  highlight SpellBad     ctermbg=0   ctermfg=1
-
-"let g:hybrid_use_Xresources = 1
-"colorscheme gruvbox 
-"let g:gruvbox_contrast_dark = 'hard'
 set colorcolumn=80
 highlight ColorColumn ctermbg=233
 set number
@@ -153,16 +129,28 @@ vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
     \:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
 omap s :normal vs<CR>
 
+" setting up my own statusline
+set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 "vim-airline config
 "let g:airline_theme="gruvbox"
-let g:airline_theme="base16"
-set laststatus=2
-
+"let g:airline_theme="base16"
+"set laststatus=2
 set nofoldenable
 
 "Syntastic
-let g:syntastic_python_checkers = ['pylint']
+"let g:syntastic_python_checkers = ['pylint']
 "
+"better-whitespace 
+function! StripTrailingWhitespace()
+    if !&binary && &filetype != 'diff'
+        normal mz
+        normal Hmy
+        %s/\s+$//e
+        normal 'yz<CR>
+        normal `z
+    endif
+endfunction
+
 "Jedi-Vim
 let g:jedi#use_splits_not_buffers = "left"
 let g:jedi#usages_command = "<leader>z"
