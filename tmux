@@ -11,12 +11,17 @@ bind r source-file ~/.tmux.conf \; display '~/.tmux.conf sourced'
 
 if 'which -s reattach-to-user-namespace' 'set -g default-command "exec initializing... 2> /dev/null & reattach-to-user-namespace $SHELL -l"'
 
-bind v split-window -h
-bind C-v split-window -h
 
-bind s split-window -v
-bind C-v split-window -v
+# -- pane splitting -----------------
+bind | split-window -h -c "#{pane_current_path}"
+bind - split-window -v -c "#{pane_current_path}"
+#bind v split-window -h
+#bind C-v split-window -h
+#
+#bind s split-window -v
+#bind C-v split-window -v
 
+# ----- kill windows ---------------
 bind-key q kill-window
 bind-key C-q kill-window
 
@@ -49,16 +54,27 @@ set -g monitor-activity on
 set -g visual-activity off
 
 # -- navigation ------------------------------------------------
-bind C-f command-prompt -p find-session 'switch-client -t %%'
+#bind C-f command-prompt -p find-session 'switch-client -t %%'
 
 # pane navigation
-bind -r h select-pane -L # left
-bind -r j select-pane -D # down
-bind -r k select-pane -U # up
-bind -r l select-pane -R # move right
+is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
+  | grep -iqE '^[^TXZ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
+
+bind-key -n C-h if-shell "$is_vim" "send-keys C-h" "select-pane -L"
+bind-key -n C-j if-shell "$is_vim" "send-keys C-j" "select-pane -D"
+bind-key -n C-k if-shell "$is_vim" "send-keys C-k" "select-pane -U"
+bind-key -n C-l if-shell "$is_vim" "send-keys C-l" "select-pane -R"
+bind-key -n C-\ if-shell "$is_vim" "send-keys C-\\" "select-pane -l"
+#bind -r h select-pane -L # left
+#bind -r j select-pane -D # down
+#bind -r k select-pane -U # up
+#bind -r l select-pane -R # move right
 
 bind > swap-pane -D
 bind < swap-pane -U
+
+# vi mode -------------------------------------------------------
+set-window-option -g mode-keys vi
 
 
 #max current pane
@@ -70,7 +86,8 @@ bind -r K resize-pane -U 2
 bind -r L resize-pane -R 2
 
 # toggle mouse
-setw -g mode-mouse on
+set-option -g mouse on
+#setw -g mode-mouse on
 
 bind m run "cut -c3- ~/.tmux.conf | sh -s toggle_mouse"
 
@@ -79,4 +96,4 @@ set-option -g default-command 'reattach-to-user-namespace -l bash'
 #if -b 'which -s reattach-to-user-namespace' bind y run "tmux save-buffer - | reattach-to-user-namespace pbcopy"'
 
 # ----------------------- powerline bar ----------------------------
-source "/Users/mariomelara/Envs/v-python/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf"
+#source "/Users/mariomelara/Envs/v-python/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf"
