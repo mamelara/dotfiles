@@ -1,6 +1,8 @@
 #----------------------- general -------------------------------
 set -g default-terminal 'screen-256color'
 
+set-option -g default-shell /bin/zsh
+
 set -g prefix2 C-a
 bind C-a send prefix -2
 
@@ -86,14 +88,9 @@ bind -r K resize-pane -U 2
 bind -r L resize-pane -R 2
 
 # toggle mouse
-set-option -g mouse on
-#setw -g mode-mouse on
 
 bind m run "cut -c3- ~/.tmux.conf | sh -s toggle_mouse"
 
-# copy to Mac OSX pasteboard
-set-option -g default-command 'reattach-to-user-namespace -l bash'
-#if -b 'which -s reattach-to-user-namespace' bind y run "tmux save-buffer - | reattach-to-user-namespace pbcopy"'
-
-# ----------------------- powerline bar ----------------------------
-#source "/Users/mariomelara/Envs/v-python/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf"
+# Setting up tmux options
+bind P paste-buffer
+set-option -g mouse on
