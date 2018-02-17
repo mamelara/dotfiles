@@ -27,6 +27,7 @@ Plugin 'benmills/vimux'
 Plugin 'vim-latex/vim-latex'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'gabrielelana/vim-markdown'
+Plugin 'morhetz/gruvbox'
 call vundle#end()
 
 filetype plugin indent on
@@ -84,7 +85,7 @@ set scrolloff=7
 
 "Non base16-color
 "set t_Co=256
-set background=light
+set background=dark
 "colorscheme base16-ocean
 "colorscheme base16-eighties
 colorscheme gruvbox
