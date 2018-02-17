@@ -92,7 +92,7 @@ set-option -g mouse on
 bind m run "cut -c3- ~/.tmux.conf | sh -s toggle_mouse"
 
 # copy to Mac OSX pasteboard
-set-option -g default-command 'reattach-to-user-namespace -l bash'
+#set-option -g default-command 'reattach-to-user-namespace -l bash'
 #if -b 'which -s reattach-to-user-namespace' bind y run "tmux save-buffer - | reattach-to-user-namespace pbcopy"'
 
 # ----------------------- powerline bar ----------------------------

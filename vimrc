@@ -26,6 +26,7 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'benmills/vimux'
 Plugin 'vim-latex/vim-latex'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'gabrielelana/vim-markdown'
 call vundle#end()
 
 filetype plugin indent on
@@ -86,7 +87,7 @@ set scrolloff=7
 set background=light
 "colorscheme base16-ocean
 "colorscheme base16-eighties
-colorscheme ryuuko
+colorscheme gruvbox
 syntax on
 syntax enable
 "let g:hybrid_custom_term_colors = 1
