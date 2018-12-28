@@ -1,5 +1,5 @@
 #----------------------- general -------------------------------
-set-option -g default-terminal 'screen'
+set-option -g default-terminal 'xterm'
 set-option -g default-shell /bin/zsh
 
 set -g prefix2 C-a
@@ -107,7 +107,9 @@ set -g @plugin 'tmux-plugins/tpm'
 # set -g @plugin 'tmux-plugins/tmux-sensible'
 # set -g @plugin 'odedlaz/tmux-onedark-theme'
 
-set -g @plugin 'arcticicestudio/nord-tmux'
+# set -g @plugin 'arcticicestudio/nord-tmux'
+
+set -g @plugin 'egel/tmux-gruvbox'
 
 run '~/.tmux/plugins/tpm/tpm'
 

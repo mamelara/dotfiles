@@ -92,9 +92,11 @@ set scrolloff=7
 "endif
 "
 
+set termguicolors
+colorscheme gruvbox
+
 "colorscheme base16-ocean
 "colorscheme base16-eighties
-"colorscheme gruvbox
 "colorscheme one
 "set background=dark
 
@@ -107,11 +109,11 @@ set scrolloff=7
 "for alactrictty, turn off for iterm2. Stupid, and yes I am bitter.
 "
 "set termguicolors 
-set background=dark
-set t_Co=16
-let g:onedark_termcolors=16
+"set background=dark
+"set t_Co=16
+"let g:onedark_termcolors=16
 
-silent! colorscheme nord
+"silent! colorscheme nord
 
 "Non base16-color
 "set t_Co=256
