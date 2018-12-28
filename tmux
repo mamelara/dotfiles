@@ -1,6 +1,5 @@
 #----------------------- general -------------------------------
-set -g default-terminal 'screen-256color'
-
+set-option -g default-terminal 'screen'
 set-option -g default-shell /bin/zsh
 
 set -g prefix2 C-a
@@ -11,7 +10,7 @@ set -g history-limit 5000
 #reload config
 bind r source-file ~/.tmux.conf \; display '~/.tmux.conf sourced'
 
-if 'which -s reattach-to-user-namespace' 'set -g default-command "exec initializing... 2> /dev/null & reattach-to-user-namespace $SHELL -l"'
+#if 'which -s reattach-to-user-namespace' 'set -g default-command "exec initializing... 2> /dev/null & reattach-to-user-namespace $SHELL -l"'
 
 
 # -- pane splitting -----------------
@@ -92,11 +91,26 @@ bind -r L resize-pane -R 2
 bind m run "cut -c3- ~/.tmux.conf | sh -s toggle_mouse"
 
 # copy to Mac OSX pasteboard
-#set-option -g default-command 'reattach-to-user-namespace -l bash'
-#if -b 'which -s reattach-to-user-namespace' bind y run "tmux save-buffer - | reattach-to-user-namespace pbcopy"'
+bind-key -T copy-mode-vi v send -X begin-selection
+bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"
+bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "pbcopy"
+bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "pbcopy"
 
 # ----------------------- powerline bar ----------------------------
 #source "/Users/mariomelara/Envs/v-python/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf"
 # Setting up tmux options
 bind P paste-buffer
 set-option -g mouse on
+
+# TPM tmux plugin manager settings
+set -g @plugin 'tmux-plugins/tpm'
+# set -g @plugin 'tmux-plugins/tmux-sensible'
+# set -g @plugin 'odedlaz/tmux-onedark-theme'
+
+set -g @plugin 'arcticicestudio/nord-tmux'
+
+run '~/.tmux/plugins/tpm/tpm'
+
+# To install press prefix + I
+# To uninstall press  prefix + alt + u
+# To update prefix + U

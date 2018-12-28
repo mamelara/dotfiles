@@ -28,6 +28,11 @@ Plugin 'vim-latex/vim-latex'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'gabrielelana/vim-markdown'
 Plugin 'morhetz/gruvbox'
+Plugin 'drewtempelmeyer/palenight.vim'
+Plugin 'joshdick/onedark.vim'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'arcticicestudio/nord-vim'
+Plugin 'fatih/vim-go'
 call vundle#end()
 
 filetype plugin indent on
@@ -77,37 +82,68 @@ set hlsearch
 
 set scrolloff=7
 
-"Colors and fonts
+"""""""""""""""""""""""""""""""""""Colors and fonts
 " Add for base16
 "set t_Co=16
 "let base16colorspace=256
+"Adding for vim according to base-16 shell
+"if filereadable(expand("~/.vimrc_background"))
+    "source ~/.vimrc_background
+"endif
+"
 
-
-"Non base16-color
-"set t_Co=256
-set background=dark
 "colorscheme base16-ocean
 "colorscheme base16-eighties
-colorscheme gruvbox
-syntax on
-syntax enable
-"let g:hybrid_custom_term_colors = 1
+"colorscheme gruvbox
+"colorscheme one
+"set background=dark
+
 "let g:hybrid_reduced_constrast = 1
 "colorscheme base16-twilight
 "colorscheme hybrid "Better colorscheme for Java
 "filetype plugin on
 "filetype indent on
+" This fucker needs to be set to get tmux working. Turn on
+"for alactrictty, turn off for iterm2. Stupid, and yes I am bitter.
+"
+"set termguicolors 
+set background=dark
+set t_Co=16
+let g:onedark_termcolors=16
 
+silent! colorscheme nord
+
+"Non base16-color
+"set t_Co=256
+syntax on
+syntax enable
+"let g:hybrid_custom_term_colors = 1
+"
+"Base16 stuff again ISO-8613-3 compatible
+"set termguicolors
+"
+"Palenight stuff
+"if (has("nvim"))
+    "let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+"endif
+
+"if (has("termguicolors"))
+    "set termguicolors
+"endif
+
+
+
+"""""""" Added for column border of 79 characters
 set colorcolumn=79
-highlight ColorColumn ctermbg=233                                        
+highlight ColorColumn ctermbg=4
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%80v.\+/
+match OverLength /\%80v.*/
 set number
 set ruler
 set nowrap
 set cursorline
 
-"Added extensions for copy and paste to clipboard
+""""""""""""""""""""""""""""""Added extensions for copy and paste to clipboard
 
 function! SetColors()
     set background=dark
@@ -154,7 +190,7 @@ set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 set nofoldenable
 
 "Syntastic
-let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_python_checkers = ['flake8']
 
 "better-whitespace 
 function! StripTrailingWhitespace()
@@ -175,8 +211,6 @@ let g:jedi#popup_select_first = 0
 let g:jedi#completions_command = "<C-Space>"
 map <Leader>b  import ipdb;ipdb.set_trace()
 
-"Python-Syntax
-let python_highlight_all = 1
 
 "Settings for ctrlp
 let g:ctrlp_max_height = 30
@@ -228,8 +262,13 @@ map <Leader>vp :VimuxPromptCommand<CR>
 map <Leader>vl :VimuxRunLastCommand<CR>
 map <Leader>vi :VimuxInspectRunnner<CR>
 map <Leader>vz :VimuxZoomRunner<CR>
+let g:VimuxUseNearest = 0
 
 " Vim-latex - settings needed for this found in next url
 " http://vim-latex.sourceforge.net/documentation/latex-suite/recommended-settings.html
 set grepprg=grep\ -nH\ $* 
 let g:tex_flavor='latex'
+
+"Python-Syntax
+let python_highlight_all = 1
+let g:python_pep8_indent_multiline_string=1
