@@ -1,5 +1,5 @@
 #----------------------- general -------------------------------
-set-option -g default-terminal 'xterm'
+set-option -g default-terminal 'xterm-256color'
 set-option -g default-shell /bin/zsh
 
 set -g prefix2 C-a
@@ -65,7 +65,7 @@ bind-key -n C-h if-shell "$is_vim" "send-keys C-h" "select-pane -L"
 bind-key -n C-j if-shell "$is_vim" "send-keys C-j" "select-pane -D"
 bind-key -n C-k if-shell "$is_vim" "send-keys C-k" "select-pane -U"
 bind-key -n C-l if-shell "$is_vim" "send-keys C-l" "select-pane -R"
-bind-key -n C-\ if-shell "$is_vim" "send-keys C-\\" "select-pane -l"
+bind-key -n 'C-\' if-shell "$is_vim" "send-keys C-\\" "select-pane -l"  # Added in quotes because \ needs to be escaped in later tmux versions
 #bind -r h select-pane -L # left
 #bind -r j select-pane -D # down
 #bind -r k select-pane -U # up
@@ -107,9 +107,9 @@ set -g @plugin 'tmux-plugins/tpm'
 # set -g @plugin 'tmux-plugins/tmux-sensible'
 # set -g @plugin 'odedlaz/tmux-onedark-theme'
 
-# set -g @plugin 'arcticicestudio/nord-tmux'
+set -g @plugin 'arcticicestudio/nord-tmux'
 
-set -g @plugin 'egel/tmux-gruvbox'
+#set -g @plugin 'egel/tmux-gruvbox'
 
 run '~/.tmux/plugins/tpm/tpm'
 

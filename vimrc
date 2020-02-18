@@ -19,7 +19,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'ajh17/VimCompletesMe'
 Plugin 'ivanov/vim-ipython'
 Plugin 'groenewege/vim-less'
-Plugin 'davidhalter/jedi-vim'
+"Plugin 'davidhalter/jedi-vim'
 Plugin 'chriskempson/base16-vim'
 Plugin 'hdima/python-syntax'
 Plugin 'rust-lang/rust.vim'
@@ -84,21 +84,29 @@ set scrolloff=7
 
 """""""""""""""""""""""""""""""""""Colors and fonts
 " Add for base16
-"set t_Co=16
-"let base16colorspace=256
 "Adding for vim according to base-16 shell
 "if filereadable(expand("~/.vimrc_background"))
     "source ~/.vimrc_background
 "endif
 "
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+set background=dark
+set t_Co=256
+colorscheme nord
+"set termguicolors
+" set base16colorspace=256
+" colorscheme gruvbox
 
-set termguicolors
-colorscheme gruvbox
+" https://browntreelabs.com/base-16-shell-and-why-its-so-awsome/
+"if filereadable(expand("~/.vimrc_background"))
+    "let base16colorspace=256
+    "source ~/.vimrc_background
+"endif
 
 "colorscheme base16-ocean
 "colorscheme base16-eighties
 "colorscheme one
-"set background=dark
 
 "let g:hybrid_reduced_constrast = 1
 "colorscheme base16-twilight
